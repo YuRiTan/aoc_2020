@@ -14,9 +14,7 @@ fn is_valid_password(re: &Regex, line: &str) -> bool {
     let check_second = password.chars().nth(second - 1).unwrap_or(' ').to_string() == letter;
 
     let mut result = false;
-    if (check_first == true) & (check_second == false) {
-        result = true;
-    } else if (check_first == false) & (check_second == true) {
+    if (check_first & !check_second) | (!check_first & check_second) {
         result = true;
     }
     result
@@ -36,6 +34,6 @@ fn main() {
         .map(|x| is_valid_password(&pattern_matcher, x))
         .collect();
 
-    let correct_count: usize = result.iter().filter(|&n| *n == true).count();
+    let correct_count: usize = result.iter().filter(|&n| *n).count();
     println!("Number of correct passwords is: {}", correct_count)
 }

@@ -1,7 +1,6 @@
+use itertools::Itertools;
 use std::fs::File;
 use std::io::Read;
-use itertools::Itertools;
-
 
 fn main() {
     let mut f = File::open("../data/day_1_input.txt").unwrap();
@@ -9,10 +8,7 @@ fn main() {
 
     f.read_to_string(&mut data).expect("could not read file");
 
-    let numbers: Vec<u32> = data
-        .lines()
-        .map(|line| line.parse().unwrap())
-        .collect();
+    let numbers: Vec<u32> = data.lines().map(|line| line.parse().unwrap()).collect();
 
     for triplet in numbers.into_iter().combinations(3) {
         let sum: u32 = triplet.iter().sum();

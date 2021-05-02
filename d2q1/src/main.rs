@@ -10,7 +10,7 @@ fn is_valid_password(re: &Regex, line: &str) -> bool {
     let password: &str = &caps.get(4).unwrap().as_str();
 
     let count: usize = password.matches(letter).count();
-    return (count >= min) & (count <= max);
+    (count >= min) & (count <= max)
 }
 
 fn main() {
@@ -27,6 +27,6 @@ fn main() {
         .map(|x| is_valid_password(&pattern_matcher, x))
         .collect();
 
-    let correct_count: usize = result.iter().filter(|&n| *n == true).count();
+    let correct_count: usize = result.iter().filter(|&n| *n).count();
     println!("Number if correct passwords is: {}", correct_count)
 }

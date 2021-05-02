@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::Read;
 
-fn count_trees(map: &Vec<Vec<char>>, start_pos: (usize, usize), slope: (usize, usize)) -> usize {
+fn count_trees(map: &[Vec<char>], start_pos: (usize, usize), slope: (usize, usize)) -> usize {
     let end_row: usize = map.len();
     let map_width: usize = map[0].len();
     let mut pos = start_pos; // (row, column)
@@ -9,7 +9,7 @@ fn count_trees(map: &Vec<Vec<char>>, start_pos: (usize, usize), slope: (usize, u
 
     while pos.0 < end_row {
         if map[pos.0][pos.1] == '#' {
-            tree_count = tree_count + 1
+            tree_count += 1
         }
         pos = (pos.0 + slope.0, (pos.1 + slope.1) % map_width)
     }
@@ -32,5 +32,8 @@ fn main() {
         .iter()
         .map(|x| count_trees(&map, (0, 0), *x))
         .product();
-    println!("The product of passed trees for the given slopes is: {}", result)
+    println!(
+        "The product of passed trees for the given slopes is: {}",
+        result
+    )
 }
